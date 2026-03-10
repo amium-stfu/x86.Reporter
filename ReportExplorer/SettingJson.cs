@@ -1,13 +1,14 @@
 ﻿
+using PdfSharp.Pdf.Filters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -43,7 +44,6 @@ namespace ReportExplorer
             MqttPassword = mqttPassword;
             RootTopic = rootTopic;
             ClientId = clientId;
-       
 
             uri = Path.Combine(Directory.GetCurrentDirectory(), AppDomain.CurrentDomain.FriendlyName) + ".setting";
             uri = uri.Replace(".exe", "");

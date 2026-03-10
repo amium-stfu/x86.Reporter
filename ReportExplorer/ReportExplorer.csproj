@@ -184,7 +184,8 @@
     <Compile Include="Templates\CancellationTokenThread.cs" />
     <Compile Include="Fonts.cs" />
     <Compile Include="Templates\LanguageLabler.cs" />
-    <Compile Include="Templates\MQTTclient.cs" />
+    <Compile Include="MQTT\MQTTclient.cs" />
+    <Compile Include="MQTT\SimpleFileMqttBroker.cs" />
     <Compile Include="MQTT\mqttModels.cs" />
     <Compile Include="Templates\oBounds.cs" />
     <Compile Include="Templates\PdfWriter.cs" />
@@ -332,11 +333,13 @@ if not exist "$(TargetDir)log" (
 )</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /R "$(TargetDir)*.dll" "$(TargetDir)lib\"
-xcopy /Y /R "$(TargetDir)*.xml" "$(TargetDir)lib\"
-del /F "$(TargetDir)*.dll"
-del /F "$(TargetDir)*.xml"
-del /F "$(TargetDir)*.pdb"</PostBuildEvent>
+    <PostBuildEvent>if exist "$(TargetDir)*.dll" xcopy /Y /R "$(TargetDir)*.dll" "$(TargetDir)lib\"
+if exist "$(TargetDir)*.xml" xcopy /Y /R "$(TargetDir)*.xml" "$(TargetDir)lib\"
+if exist "$(TargetDir)*.dll" del /F /Q "$(TargetDir)*.dll"
+if exist "$(TargetDir)*.xml" del /F /Q "$(TargetDir)*.xml"
+if exist "$(TargetDir)*.pdb" del /F /Q "$(TargetDir)*.pdb"
+if exist "$(ProjectDir)Resources\DefaultLanguages.json" copy /Y "$(ProjectDir)Resources\DefaultLanguages.json" "$(TargetDir)Languages.json"
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -253,13 +253,18 @@ namespace ReportExplorer
                 dev_rel = point.dut__stats.ContainsKey("dev.rel") ? point.dut__stats["dev.rel"] : null;
                 dev_std = point.dut__stats.ContainsKey("dev.std") ? point.dut__stats["dev.std"] : null;
 
-                string rating = $"Δ {dev_abs} {unit} / {dev_rel} %";
+
+                limit = limit == "-" ? "" : $"({limit})";
+                result = result == "-" ? "" : result;
+               
+
+                string rating = $"Δ {dev_abs} {unit} / {dev_rel} % {limit}";
 
                 if (limit != null)
-                    rating = rating + " (" + limit + ")";
+                    rating = rating;
 
                 if (dev_rel == null || dev_rel.ToUpper() == "NAN")
-                    rating = $"Δ {dev_abs} {unit} / -";
+                    rating = $"Δ {dev_abs} {unit} / - {limit}";
 
                 if (description == "formula")
                 {

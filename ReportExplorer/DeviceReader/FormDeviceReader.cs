@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Utils.DPI;
+using DevExpress.XtraEditors;
 using Serilog;
 using System;
 using System.Collections;
@@ -78,7 +79,8 @@ namespace ReportExplorer
                 {
                     foreach (DataRow row in Rows)
                     {
-                        if (row["name"] == name)
+                        Debug.WriteLine(row["name"].ToString());
+                        if (row["name"].ToString() == name)
                             return result = row["value"].ToString();
                     }
                     return result;
@@ -152,6 +154,8 @@ namespace ReportExplorer
         ValueTable ambientConditions;
         ValueTable procedure;
 
+        ValueTable testLimits;
+
         public ResultsTable Results;
         public ResultsTable Verification;
 
@@ -186,7 +190,9 @@ namespace ReportExplorer
             procedure = new ValueTable("procedure");
             Results = new ResultsTable();
             Verification = new ResultsTable();
+            testLimits = new ValueTable("testLimits");
 
+            if(mqttClient != null)
             this.mqttClient = mqttClient;
 
             order.Add("order.aid");
@@ -216,6 +222,8 @@ namespace ReportExplorer
             gridControlResults.DataSource = Results;
             gridControlVerification.DataSource = Verification;
 
+            gridTestLimits.DataSource = testLimits;
+
 
         }
 
@@ -231,6 +239,7 @@ namespace ReportExplorer
 
         public void Start()
         {
+            if(mqttClient != null)
             Client = new AkClient("LgdClient", Socket);
         }
 
@@ -257,11 +266,17 @@ namespace ReportExplorer
 
         }
 
+
+        List<string> LinearityRead = new List<string>();
+
         public void LincheckRead()
         {
             verification1066 v1066 = new verification1066();
-            List<string> read = Command(" ATST K0 TLIN");
-            Log.Information("'"+string.Join(" ", read)+"'");
+            LinearityRead = Command(" ATST K0 TLIN");
+            
+            
+
+            Log.Information("'"+string.Join(" ", LinearityRead)+"'");
             dut.Update("devices.aid", Command(" AKEN K0")[3]);
             Log.Information("devices.aid:'" + dut.Read("devices.aid") +"'");
 
@@ -293,11 +308,7 @@ namespace ReportExplorer
             procedure.Add("procedure.verification.type");
 
             procedure.Update("procedure.verification.type", "40CFR1065.307");
-            procedure.Update("procedure.step.duration", read[4] + " s");
-
-
-
-
+            procedure.Update("procedure.step.duration", LinearityRead[4] + " s");
 
             string id = DateTime.Now.ToString("yyMMddhhmmss").Replace(" ", "").Replace(":", "").Replace(".", "");
 
@@ -313,20 +324,65 @@ namespace ReportExplorer
 
             order.Update("order.aid",id);
             order.Update("order.report_aid", id + "-0");
-            order.Update("order.date", read[3].Replace("_", " "));
+            order.Update("order.date", LinearityRead[3].Replace("_", " "));
+
+            CalcLinearity(LinearityRead);
+        }
+
+
+   
+
+
+        void CalcLinearity(List<string> read)
+        {
+            verification1066 v1066 = new verification1066();
+            verification.Clear();
+            Verification.Clear();
+            results.Clear();
+            Results.Clear();
 
             double div = 0;
             int c = 0;
+
+
+            bool limitsAdded = false;
+
+            if (testLimits.Rows.Count > 0)
+            {
+                limitsAdded = true;
+            }
+
             foreach (string value in read)
             {
+                if (div > 100) break;
+
                 if (c > 4)
                 {
-                    if (value.Length > 0)
+                    if (value.Length > 0 && value != "#")
                     {
                         v1066.Linearity.SamplePoints++;
                         ResultDataPoint p = new ResultDataPoint();
+
+
+
                         p.Cfg = div + " %";
                         p.Ref = Math.Round(div / 100 * Spangas, 2);
+
+
+                        string limit = "-";
+                        if (limitsAdded == false)
+                        {
+
+                            if (div == 0)
+                                limit = "1";
+                            else
+                                limit = "2%";
+                            testLimits.Add("linStepLimit."+div, limit);
+                        }
+                        else
+                            limit = testLimits.Read("linStepLimit."+div);
+
+                        p.Limit = limit;
 
 
                         p.Dut = Math.Round(double.Parse(value, CultureInfo.InvariantCulture), 2);
@@ -337,19 +393,51 @@ namespace ReportExplorer
                             p.DevRel = Math.Round(p.DevAbs / p.Ref * 100, 2);
                         }
 
+                        string result = "-";
+
+                        if (limit != "-")
+                        {
+                            try
+                            {
+                                if (limit.EndsWith("%"))
+                                {
+                                    double limitValue = double.Parse(limit.Replace(",", ".").TrimEnd('%'), CultureInfo.InvariantCulture);
+                                    if (Math.Abs(p.DevRel) <= limitValue)
+                                        result = "passed";
+                                    else
+                                        result = "failed";
+                                }
+                                else
+                                {
+                                    double limitValue = double.Parse(limit.Replace(",", "."), CultureInfo.InvariantCulture);
+                                    if (Math.Abs(p.DevAbs) <= limitValue)
+                                        result = "passed";
+                                    else
+
+                                        result = "failed";
+                                }
+                            }
+                            catch
+                            {
+                                MessageBox.Show($"Error parsing limit value for step {p.Cfg} :'" + limit +"'","LimitError",MessageBoxButtons.OK,MessageBoxIcon.Error);
+
+                            }
+                        }
+
+                        p.Result = result;
+
                         results.Add(p);
-                        Results.Add(name: p.Cfg, _ref: p.Ref, dut: p.Dut, devAbs: p.DevAbs, devRel: p.DevRel, limit: "", result: "");
+                        Results.Add(name: p.Cfg, _ref: p.Ref, dut: p.Dut, devAbs: p.DevAbs, devRel: p.DevRel, limit: limit, result: result);
                         v1066.Linearity.Dut.Add(p.Dut);
                         v1066.Linearity.Ref.Add(p.Ref);
                         div += 10;
                     }
                 }
-                
+
                 c++;
             }
-    
-            v1066.CalculateLinearity();
 
+            v1066.CalculateLinearity();
             ResultDataPoint v = new ResultDataPoint();
             v.Cfg = "n";
             v.Dut = v1066.Linearity.SamplePoints;
@@ -362,7 +450,7 @@ namespace ReportExplorer
 
             v = new ResultDataPoint();
             v.Cfg = "a1";
-            v.Dut = Math.Round((double)v1066.Linearity.a1,2);
+            v.Dut = Math.Round((double)v1066.Linearity.a1, 2);
             v.Limit = "0.98 .. 1.02";
             v.Result = (double)v1066.Linearity.a1 >= 0.98 && (double)v1066.Linearity.a1 <= 1.02 ? "passed" : "failed";
             verification.Add(v);
@@ -397,12 +485,19 @@ namespace ReportExplorer
             v.Result = (double)v1066.Linearity.r2 >= 0.99 ? "passed" : "failed";
             verification.Add(v);
             Console.WriteLine($"{v.Cfg} {v.Dut} {v.Limit} {v.Result}");
-            Verification.Add(name: v.Cfg, dut: v.Dut, limit: v.Limit, result: v.Result);   
+            Verification.Add(name: v.Cfg, dut: v.Dut, limit: v.Limit, result: v.Result);
         }
 
 
-        void createReport()
+
+
+        void CreateReport()
         {
+            report = new Report(
+            aid: DateTime.Now.ToString("yyMMddhhmmss").Replace(" ", "").Replace(":", "").Replace(".", ""),
+            type: "C0",
+            cfg: "linCheck"
+            );
 
             report.AddOrderData(
                 aid: order.Read("order.aid"),
@@ -481,7 +576,9 @@ namespace ReportExplorer
 
             foreach (ResultDataPoint p in results)
             {
-                report.result.data.Add(new datapoint(description: p.Cfg, reference: p.Ref.ToString(), dut: p.Dut.ToString(),
+                Debug.WriteLine("Limit: '" +p.Limit +"'");
+                
+                report.result.data.Add(new datapoint(description: p.Cfg, reference: p.Ref.ToString(), dut: p.Dut.ToString(), limit: p.Limit, result: p.Result,
                                 dutStatisticValues: $"dev.abs={p.DevAbs.ToString().Replace(",", ".")},dev.rel={p.DevRel.ToString().Replace(",", ".")}"));
              
             }
@@ -498,18 +595,18 @@ namespace ReportExplorer
 
         private void FormLgd_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Client.Abort();
+            Client?.Abort();
         }
 
         private void FormLgd_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Client.Abort();
+            Client?.Abort();
         }
 
         private void btnPublish_Click(object sender, EventArgs e)
         {
            
-            createReport();
+            CreateReport();
             var writeOption = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = new qj_NamingPolice(),
@@ -529,12 +626,15 @@ namespace ReportExplorer
             message = DateTime.Now.ToString("MM'/'dd HH:mm")+"; " + dut.Read("devices.aid") + "; " + "new lincheck";
             mqttClient.Publish(mqttClient.RootTopic + DeviceGroup + "/" + dut.Read("devices.hsn"),message, true); 
 
-
-
-
-
            Close();
         }
+
+
+
+
+
+
+
 
         private void btnExport_Click(object sender, EventArgs e)
         {
@@ -561,6 +661,11 @@ namespace ReportExplorer
                     ValueTableToJsonFile(directory, filename, ref3);
                     ValueTableToJsonFile(directory, filename, procedure);
                     ValueTableToJsonFile(directory, filename, ambientConditions);
+                    ValueTableToJsonFile(directory, filename, testLimits);
+
+                    ExportResults(directory, filename, results);
+
+
 
                     //string json = JsonSerializer.Serialize<Dictionary<string, string>>(convertDataTable(dut), Reporter.JsonOptions);
                     //File.WriteAllText(ofd.FileName + "_dut.json", json);
@@ -627,8 +732,23 @@ namespace ReportExplorer
 
                 }
 
-                if (file.EndsWith("order.json")) table = order;
+                if (file.EndsWith("testLimits.json")) 
+                {
+                    table = testLimits;
+                
+                }
 
+                if (file.EndsWith("LinCheckResults.json"))
+                {
+                    LinearityRead = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(file), Reporter.JsonOptions);
+                  
+                    Spangas = double.Parse(LinearityRead[LinearityRead.Count - 2], CultureInfo.InvariantCulture);
+                    CalcLinearity(LinearityRead);
+                    return;
+
+                }
+
+                if (file.EndsWith("order.json")) table = order;
                 if (file.EndsWith("customer.json")) table = customer;
                 if (file.EndsWith("ambientConditions.json")) table = ambientConditions;
                 if (file.EndsWith("procedure.json")) table = procedure;
@@ -642,7 +762,7 @@ namespace ReportExplorer
                 {
                     foreach (var item in read)
                     { 
-                        if(!item.Key.EndsWith("hsn") && !item.Key.EndsWith("aid"))
+                       // if(!item.Key.EndsWith("hsn") && !item.Key.EndsWith("aid"))
                         table.Update(item.Key, item.Value);
                     }
 
@@ -661,6 +781,22 @@ namespace ReportExplorer
             //gridControlDut.Refresh();
             //gridView1.RefreshData();
  
+        }
+
+
+
+        void ExportResults(string folder, string name, List<ResultDataPoint> data)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize<List<string>>(LinearityRead, Reporter.JsonOptions);
+                string filename = name + "_results.json";
+                File.WriteAllText(Path.Combine(folder, filename), json);
+            }
+            catch
+            {
+                Log.Fatal($"Export Results: {folder} {name}");
+            }
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -779,6 +915,11 @@ namespace ReportExplorer
             //    e.Cancel = true;
             //    return;
             //}
+        }
+
+        private void btnRecalcualte_Click(object sender, EventArgs e)
+        {
+            CalcLinearity(LinearityRead);
         }
     }
 

@@ -1,13 +1,14 @@
 ﻿using DevExpress.Skins;
 using DevExpress.UserSkins;
+using PdfSharp.Pdf.Filters;
+using ReportExplorer.Properties;
+using Serilog;
+using Serilog.Sinks.File;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
-using Serilog;
-using Serilog.Sinks.File;
 using System.Text.Json;
-using ReportExplorer.Properties;
+using System.Windows.Forms;
 
 namespace ReportExplorer
 {
@@ -21,12 +22,8 @@ namespace ReportExplorer
         public static ReportMqttClient Client;
         public static JsonSerializerOptions JsonOptions { get; set; }
         public static qj_NamingPolice NamingPolicy { get; set; }
-
         public static SettingJson Settings { get; set; }
-
         public static string User { get; set; }
-
-
         public static string dateTime()
         {
             DateTime localTime = DateTime.Now; // Local time
@@ -51,11 +48,13 @@ namespace ReportExplorer
         {
 
             Reporter.Settings = new SettingJson(
-                mqttUri: "127.0.0.1:7700",
-                mqttUser: "amium",
-                mqttPassword: "amium07#",
-                rootTopic: "stfu/amium",
-                clientId: "stfu_laptop");
+            mqttUri: "127.0.0.1:183",
+            mqttUser: "mzu",
+            mqttPassword: "amium07",
+            rootTopic: "amium/reports/",
+            clientId: "Reporter"
+        
+            );
 
 
             Reporter.Language = new LanguageLabler("ReportExplorer");

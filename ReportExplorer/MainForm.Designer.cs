@@ -135,6 +135,7 @@
             this.btnEditReport.Size = new System.Drawing.Size(80, 76);
             this.btnEditReport.TabIndex = 8;
             this.btnEditReport.Text = "New\r\nReport";
+            this.btnEditReport.Click += new System.EventHandler(this.btnEditReport_Click);
             // 
             // btnImportReport
             // 

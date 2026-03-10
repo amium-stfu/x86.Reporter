@@ -109,9 +109,16 @@
             this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelCustomer = new DevExpress.XtraEditors.LabelControl();
+            this.tabTestLimits = new DevExpress.XtraTab.XtraTabPage();
+            this.gridTestLimits = new DevExpress.XtraGrid.GridControl();
+            this.gridViewTestLimits = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.btnRecalcualte = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel3)).BeginInit();
@@ -147,6 +154,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView8)).BeginInit();
+            this.tabTestLimits.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridTestLimits)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewTestLimits)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,7 +179,7 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 30F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 6F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 463F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 136F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 175F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 6F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 30F)});
             this.tablePanel1.Size = new System.Drawing.Size(1549, 826);
@@ -593,24 +603,25 @@
             // panelControl1
             // 
             this.tablePanel1.SetColumn(this.panelControl1, 0);
+            this.panelControl1.Controls.Add(this.btnRecalcualte);
             this.panelControl1.Controls.Add(this.btnPublish);
             this.panelControl1.Controls.Add(this.btnImport);
             this.panelControl1.Controls.Add(this.btnExport);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(13, 645);
+            this.panelControl1.Location = new System.Drawing.Point(13, 606);
             this.panelControl1.Name = "panelControl1";
             this.tablePanel1.SetRow(this.panelControl1, 3);
-            this.panelControl1.Size = new System.Drawing.Size(446, 132);
+            this.panelControl1.Size = new System.Drawing.Size(446, 171);
             this.panelControl1.TabIndex = 4;
             // 
             // btnPublish
             // 
             this.btnPublish.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F, System.Drawing.FontStyle.Bold);
             this.btnPublish.Appearance.Options.UseFont = true;
-            this.btnPublish.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnPublish.Location = new System.Drawing.Point(2, 72);
+            this.btnPublish.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnPublish.Location = new System.Drawing.Point(2, 113);
             this.btnPublish.Name = "btnPublish";
-            this.btnPublish.Size = new System.Drawing.Size(442, 35);
+            this.btnPublish.Size = new System.Drawing.Size(442, 56);
             this.btnPublish.TabIndex = 2;
             this.btnPublish.Text = "Publish";
             this.btnPublish.Click += new System.EventHandler(this.btnPublish_Click);
@@ -651,7 +662,7 @@
             this.tabControlData.Name = "tabControlData";
             this.tablePanel1.SetRow(this.tabControlData, 2);
             this.tabControlData.SelectedTabPage = this.tabPageDut;
-            this.tabControlData.Size = new System.Drawing.Size(446, 593);
+            this.tabControlData.Size = new System.Drawing.Size(446, 554);
             this.tabControlData.TabIndex = 3;
             this.tabControlData.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabPageDut,
@@ -660,7 +671,8 @@
             this.tabPageRef3,
             this.tabPageProcedure,
             this.xtraTabPage4,
-            this.tabPageOrder});
+            this.tabPageOrder,
+            this.tabTestLimits});
             this.tabControlData.DragDrop += new System.Windows.Forms.DragEventHandler(this.tabControlData_DragDrop);
             this.tabControlData.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabControlData_DragEnter);
             // 
@@ -673,7 +685,7 @@
             this.tabPageDut.Appearance.PageClient.Options.UseBackColor = true;
             this.tabPageDut.Controls.Add(this.gridControlDut);
             this.tabPageDut.Name = "tabPageDut";
-            this.tabPageDut.Size = new System.Drawing.Size(444, 545);
+            this.tabPageDut.Size = new System.Drawing.Size(444, 506);
             this.tabPageDut.Text = "Device";
             // 
             // gridControlDut
@@ -683,7 +695,7 @@
             this.gridControlDut.Location = new System.Drawing.Point(0, 0);
             this.gridControlDut.MainView = this.gridView1;
             this.gridControlDut.Name = "gridControlDut";
-            this.gridControlDut.Size = new System.Drawing.Size(444, 545);
+            this.gridControlDut.Size = new System.Drawing.Size(444, 506);
             this.gridControlDut.TabIndex = 0;
             this.gridControlDut.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -709,7 +721,7 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.AppearanceCell.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn1.AppearanceCell.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
             this.gridColumn1.AppearanceCell.Options.UseFont = true;
             this.gridColumn1.Caption = "valueName";
             this.gridColumn1.FieldName = "name";
@@ -717,10 +729,10 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("Calibri", 12F);
             this.gridColumn2.AppearanceCell.Options.UseFont = true;
             this.gridColumn2.AppearanceHeader.BackColor = System.Drawing.Color.White;
-            this.gridColumn2.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn2.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.gridColumn2.AppearanceHeader.Options.UseBackColor = true;
             this.gridColumn2.AppearanceHeader.Options.UseFont = true;
             this.gridColumn2.Caption = "Paramneter";
@@ -734,7 +746,7 @@
             // gridColumn3
             // 
             this.gridColumn3.AppearanceCell.BackColor = System.Drawing.Color.White;
-            this.gridColumn3.AppearanceCell.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn3.AppearanceCell.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
             this.gridColumn3.AppearanceCell.Options.UseBackColor = true;
             this.gridColumn3.AppearanceCell.Options.UseFont = true;
             this.gridColumn3.AppearanceHeader.BackColor = System.Drawing.Color.White;
@@ -1278,6 +1290,79 @@
             this.labelCustomer.TabIndex = 1;
             this.labelCustomer.Text = "Customer";
             // 
+            // tabTestLimits
+            // 
+            this.tabTestLimits.Controls.Add(this.gridTestLimits);
+            this.tabTestLimits.Name = "tabTestLimits";
+            this.tabTestLimits.Size = new System.Drawing.Size(444, 545);
+            this.tabTestLimits.Text = "TestLimits";
+            // 
+            // gridTestLimits
+            // 
+            this.gridTestLimits.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridTestLimits.Location = new System.Drawing.Point(0, 0);
+            this.gridTestLimits.MainView = this.gridViewTestLimits;
+            this.gridTestLimits.Name = "gridTestLimits";
+            this.gridTestLimits.Size = new System.Drawing.Size(444, 545);
+            this.gridTestLimits.TabIndex = 1;
+            this.gridTestLimits.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewTestLimits});
+            // 
+            // gridViewTestLimits
+            // 
+            this.gridViewTestLimits.Appearance.GroupRow.BackColor = System.Drawing.Color.White;
+            this.gridViewTestLimits.Appearance.GroupRow.Options.UseBackColor = true;
+            this.gridViewTestLimits.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn4,
+            this.gridColumn5,
+            this.gridColumn6});
+            this.gridViewTestLimits.GridControl = this.gridTestLimits;
+            this.gridViewTestLimits.Name = "gridViewTestLimits";
+            this.gridViewTestLimits.OptionsView.ShowColumnHeaders = false;
+            this.gridViewTestLimits.OptionsView.ShowDetailButtons = false;
+            this.gridViewTestLimits.OptionsView.ShowGroupPanel = false;
+            this.gridViewTestLimits.OptionsView.ShowIndicator = false;
+            this.gridViewTestLimits.RowHeight = 20;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.AppearanceCell.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
+            this.gridColumn4.AppearanceCell.Options.UseFont = true;
+            this.gridColumn4.Caption = "valueName";
+            this.gridColumn4.FieldName = "name";
+            this.gridColumn4.Name = "gridColumn4";
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.AppearanceCell.Font = new System.Drawing.Font("Calibri", 12F);
+            this.gridColumn5.AppearanceCell.Options.UseFont = true;
+            this.gridColumn5.AppearanceHeader.BackColor = System.Drawing.Color.White;
+            this.gridColumn5.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.gridColumn5.AppearanceHeader.Options.UseBackColor = true;
+            this.gridColumn5.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn5.Caption = "Paramneter";
+            this.gridColumn5.FieldName = "label";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.OptionsColumn.AllowEdit = false;
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 0;
+            this.gridColumn5.Width = 98;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.AppearanceCell.BackColor = System.Drawing.Color.White;
+            this.gridColumn6.AppearanceCell.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
+            this.gridColumn6.AppearanceCell.Options.UseBackColor = true;
+            this.gridColumn6.AppearanceCell.Options.UseFont = true;
+            this.gridColumn6.AppearanceHeader.BackColor = System.Drawing.Color.White;
+            this.gridColumn6.AppearanceHeader.Options.UseBackColor = true;
+            this.gridColumn6.Caption = " ";
+            this.gridColumn6.FieldName = "value";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 1;
+            this.gridColumn6.Width = 173;
+            // 
             // labelControl2
             // 
             this.labelControl2.Appearance.BackColor = System.Drawing.Color.Black;
@@ -1308,6 +1393,18 @@
             // xtraTabbedMdiManager1
             // 
             this.xtraTabbedMdiManager1.MdiParent = this;
+            // 
+            // btnRecalcualte
+            // 
+            this.btnRecalcualte.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F, System.Drawing.FontStyle.Bold);
+            this.btnRecalcualte.Appearance.Options.UseFont = true;
+            this.btnRecalcualte.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnRecalcualte.Location = new System.Drawing.Point(2, 72);
+            this.btnRecalcualte.Name = "btnRecalcualte";
+            this.btnRecalcualte.Size = new System.Drawing.Size(442, 35);
+            this.btnRecalcualte.TabIndex = 2;
+            this.btnRecalcualte.Text = "Recalculate";
+            this.btnRecalcualte.Click += new System.EventHandler(this.btnRecalcualte_Click);
             // 
             // FormDeviceReader
             // 
@@ -1364,6 +1461,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView8)).EndInit();
+            this.tabTestLimits.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridTestLimits)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewTestLimits)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();
             this.ResumeLayout(false);
 
@@ -1385,9 +1485,6 @@
         private DevExpress.XtraTab.XtraTabPage tabPageOrder;
         private DevExpress.XtraGrid.GridControl gridControlDut;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.GridControl gridControlRef1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
@@ -1453,5 +1550,15 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn34;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn35;
         private DevExpress.XtraEditors.LabelControl labelHeader;
+        private DevExpress.XtraTab.XtraTabPage tabTestLimits;
+        private DevExpress.XtraGrid.GridControl gridTestLimits;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewTestLimits;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraEditors.SimpleButton btnRecalcualte;
     }
 }

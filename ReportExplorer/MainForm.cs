@@ -29,11 +29,11 @@ namespace ReportExplorer
         {
             InitializeComponent();
             Reporter.Client = new ReportMqttClient(gridControl);
-            Reporter.Client.BrokerUri = Reporter.Settings.MqttUri;
-            Reporter.Client.Username = Reporter.Settings.MqttUser;
-            Reporter.Client.Password = Reporter.Settings.MqttPassword;
-            Reporter.Client.ClientId = Reporter.Settings.ClientId;
-            Reporter.Client.RootTopic = Reporter.Settings.RootTopic;
+            //Reporter.Client.BrokerUri = Reporter.Settings.MqttUri;
+            //Reporter.Client.Username = Reporter.Settings.MqttUser;
+            //Reporter.Client.Password = Reporter.Settings.MqttPassword;
+            //Reporter.Client.ClientId = Reporter.Settings.ClientId;
+            //Reporter.Client.RootTopic = Reporter.Settings.RootTopic;
             gridControl.DataSource = Reporter.Client.C0list;
            // Reporter.Client.TreeView.Show();
 
@@ -56,7 +56,7 @@ namespace ReportExplorer
            
             string json = Reporter.Client.C0list.Rows[rowHandle]["Result"].ToString();
 
-            File.WriteAllText(@"T:\debug_report.json", json);
+           // File.WriteAllText(@"T:\debug_report.json", json);
 
             C0report c0Report = new C0report();
             c0Report.Source = JsonSerializer.Deserialize<Report>(json, Reporter.JsonOptions);
@@ -69,14 +69,10 @@ namespace ReportExplorer
 
         void saveReport()
         {
-
-           
-
-
             int rowHandle = gridView1.FocusedRowHandle;
             string json = Reporter.Client.C0list.Rows[rowHandle]["Result"].ToString();
 
-            File.WriteAllText(@"T:\debug_report.json", json);
+          //  File.WriteAllText(@"T:\debug_report.json", json);
 
             C0report c0Report = new C0report();
             c0Report.Source = JsonSerializer.Deserialize<Report>(json, Reporter.JsonOptions);
@@ -440,6 +436,13 @@ namespace ReportExplorer
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
           
+        }
+
+        private void btnEditReport_Click(object sender, EventArgs e)
+        {
+            FormDeviceReader editor = new FormDeviceReader("Report Editor", Reporter.Client, "manual");
+            editor.ShowDialog();
+            
         }
     }
 }
