@@ -1,0 +1,212 @@
+{
+  "keyWord": {
+    "sys.c0.title": {
+      "en": "C0 Calibration certificate",
+      "de": "C0 Kalibrierzertifikat"
+    },
+    "sys.c0.description": {
+      "en": "This certificate confirms the correct realisation of a calibration according to the appropriate specifications. It documents and evaluates the detecte deviations regarding given criteria.\n\nThis calibration certificate is automatically generated and valid without signature.",
+      "de": "Dieses Zertifikat best\u00E4tigt die korrekte Durchf\u00FChrung einer Kalibrierung gem\u00E4\u00DF den entsprechenden Spezifikationen. Es dokumentiert und bewertet die festgestellten Abweichungen hinsichtlich gegebener Kriterien.\n\nDieses Kalibrierzertifikat wird automatisch erstellt und ist ohne Unterschrift g\u00FCltig."
+    },
+    "order.aid": {
+      "en": "Amium Id",
+      "de": "Amium Id"
+    },
+    "order.location": {
+      "en": "Location",
+      "de": "Ort"
+    },
+    "order.date": {
+      "en": "Date",
+      "de": "Datum"
+    },
+    "order.user": {
+      "en": "Operator",
+      "de": "Operator"
+    },
+    "customer.aid": {
+      "en": "Customer Id",
+      "de": "Kundennummer"
+    },
+    "customer.person": {
+      "en": "Person",
+      "de": "Person"
+    },
+    "customer.company": {
+      "en": "Company",
+      "de": "Firma"
+    },
+    "customer.street": {
+      "en": "",
+      "de": ""
+    },
+    "customer.postcode": {
+      "en": "",
+      "de": ""
+    },
+    "customer.country": {
+      "en": "",
+      "de": ""
+    },
+    "devices.aid": {
+      "en": "Amium Id",
+      "de": "Amium Id"
+    },
+    "devices.description": {
+      "en": "Description",
+      "de": "Beschreibung"
+    },
+    "devices.component": {
+      "en": "Componet",
+      "de": "Komponente"
+    },
+    "devices.manufacturer": {
+      "en": "Manufacturer",
+      "de": "Hersteller"
+    },
+    "devices.cfg": {
+      "en": "Configuration",
+      "de": "Konfiguration"
+    },
+    "devices.range": {
+      "en": "Range",
+      "de": "Messbereich"
+    },
+    "devices.unit": {
+      "en": "Unit",
+      "de": "Einheit"
+    },
+    "devices.accuracy": {
+      "en": "Accuracy",
+      "de": "Genauigkeit"
+    },
+    "procedure.linCheck": {
+      "en": "The calibration is the repeatable comparison of measurement values delivered by a device under test with those of a calibration standard of known accuracy at defined points. The calibration is done without change of the device under test and without change of its measurement values.",
+      "de": "Die Kalibrierung ist der wiederholbare Vergleich von Messwerten, die von einem zu pr\u00FCfenden Ger\u00E4t geliefert werden, mit denen eines Kalibrierstandards bekannter Genauigkeit an definierten Punkten. Die Kalibrierung erfolgt ohne \u00C4nderung des zu pr\u00FCfenden Ger\u00E4ts und ohne \u00C4nderung seiner Messwerte."
+    },
+    "procedure.step.count": {
+      "en": "Cal. Points count",
+      "de": "Anzahl Messpunkte"
+    },
+    "procedure.step.duration": {
+      "en": "Duration per point",
+      "de": "Messdauer je Punkt"
+    },
+    "procedure.verification.type": {
+      "en": "Verification type",
+      "de": "\u00DCberpr\u00FCfung nach"
+    },
+    "ambient_conditions.t": {
+      "en": "Temperature",
+      "de": "Temperatur"
+    },
+    "ambient_conditions.rh": {
+      "en": "Humidity",
+      "de": "Feuchte"
+    },
+    "ambient_conditions.patm": {
+      "en": "Pressure",
+      "de": "Druck"
+    },
+    "page": {
+      "en": "Page",
+      "de": "Seite"
+    },
+    "calibration.mark": {
+      "en": "Calibration mark",
+      "de": "Kalibrierzeichen"
+    },
+    "settings": {
+      "en": "Settings",
+      "de": "Testeinstellungen"
+    },
+    "reference": {
+      "en": "Reference",
+      "de": "Referenz"
+    },
+    "dut": {
+      "en": "Device under test",
+      "de": "Pr\u00FCfling"
+    },
+    "order": {
+      "en": "Order",
+      "de": "Auftrag"
+    },
+    "ambient.conditions": {
+      "en": "Ambient conditions",
+      "de": "Umgebungsbedingungen"
+    },
+    "rating": {
+      "en": "Rating",
+      "de": "Bewertung"
+    },
+    "limit": {
+      "en": "Limit",
+      "de": "Grenzen"
+    },
+    "measurement.result": {
+      "en": "Measurement result",
+      "de": "Messergebnis"
+    },
+    "measurement.reference": {
+      "en": "Ref.",
+      "de": "Ref."
+    },
+    "measurement.dut": {
+      "en": "D.u.t.",
+      "de": "Pr\u00FCf."
+    },
+    "verification.result": {
+      "en": "Verification result",
+      "de": "Ergebnisse der \u00DCberpr\u00FCfung"
+    },
+    "verification.accuracy": {
+      "en": "Accuracy",
+      "de": "Genauigkeit"
+    },
+    "verification.noise": {
+      "en": "Noise",
+      "de": "Rauschen"
+    },
+    "verification.repeatability": {
+      "en": "Repeatability",
+      "de": "Wiederholbarkeit"
+    },
+    "passed": {
+      "en": "passed",
+      "de": "bestanden"
+    },
+    "failed": {
+      "en": "failed",
+      "de": "durchgefallen"
+    },
+    "configuration": {
+      "en": "Configuration",
+      "de": "Konfiguration"
+    },
+    "procedure": {
+      "en": "Procedure",
+      "de": "Pr\u00FCfprozedur"
+    },
+    "linCheck.cal.zero": {
+      "en": "Cal. Zeropoint",
+      "de": "Kal. Nullpunkt"
+    },
+    "linCheck.cal.end": {
+      "en": "Cal. Endpoint",
+      "de": "Kal. Endpunkt"
+    },
+    "linCheck.offset": {
+      "en": "Offset",
+      "de": "Nullpunkt"
+    },
+    "linCheck.span": {
+      "en": "Span",
+      "de": "Endpunkt"
+    },
+    "linCheck.formula": {
+      "en": "Formula for reference value: (Span - Offset) * Configuration \u002B Offset",
+      "de": "Formel f\u00FCr den Referenzwert: (Endpunkt - Nullpunkt) * Konfiguration \u002B Nullpunkt"
+    }
+  }
+}

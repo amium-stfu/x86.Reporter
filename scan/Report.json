@@ -1,0 +1,332 @@
+{
+  "sys": {
+    "aid": "2824-35001",
+    "type": "C0",
+    "cfg": "linCheck",
+    "info": "This certificate confirms the correct realisation of a calibration according to the appropriate specifications. It documents and evaluates the detecte deviations regarding given criteria.\n\nThis calibration certificate is automatically generated and valid without signature."
+  },
+  "order": {
+    "aid": "2024-124356",
+    "report_aid": "3030-2300",
+    "date": "2024-10-04",
+    "location": "Amium labor 0815",
+    "user": "STFU"
+  },
+  "customer": [
+    {
+      "aid": "aid",
+      "person": "Hans Dampf",
+      "company": "Amium",
+      "street": "Durchholzen 34",
+      "postcode": "Walchsee",
+      "country": "Austria"
+    }
+  ],
+  "devices": [
+    {
+      "data": {
+        "aid": "LGD319",
+        "type": "dut",
+        "component": "NH3",
+        "manufacturer": "Amium",
+        "description": "Laser gas detector",
+        "cfg": "C01",
+        "range": "0 .. 1000",
+        "unit": "ppm",
+        "accuracy": "+/- 1 rel. dev."
+      },
+      "calibration": {
+        "date": null,
+        "aid": null,
+        "valid_until": null
+      }
+    },
+    {
+      "data": {
+        "aid": "GD001",
+        "type": "ref",
+        "component": null,
+        "manufacturer": "Amium",
+        "description": "Gas devider",
+        "cfg": "C02",
+        "range": "0 .. 100",
+        "unit": "%",
+        "accuracy": "+/- 1 rel. dev."
+      },
+      "calibration": {
+        "date": "2024-01-31",
+        "aid": "66306",
+        "valid_until": "2025-01-31"
+      }
+    },
+    {
+      "data": {
+        "aid": "GZ001",
+        "type": "ref",
+        "component": null,
+        "manufacturer": "Linde",
+        "description": "Gaszylinder\nC3H8 99.92 ppm in N2",
+        "cfg": null,
+        "range": null,
+        "unit": null,
+        "accuracy": "+/- 1 rel. dev."
+      },
+      "calibration": {
+        "date": "2024-05-31",
+        "aid": "1111-22222",
+        "valid_until": "2026-05-31"
+      }
+    },
+    {
+      "data": {
+        "aid": "GZ002",
+        "type": "ref",
+        "component": null,
+        "manufacturer": "Linde",
+        "description": "Gaszylinder\n100% N2",
+        "cfg": null,
+        "range": null,
+        "unit": null,
+        "accuracy": ">= 99.8 %"
+      },
+      "calibration": {
+        "date": "2024-07-31",
+        "aid": "1111-33333",
+        "valid_until": "2026-07-31"
+      }
+    }
+  ],
+  "procedure": {
+    "step.count": "10",
+    "step.duration": "60 s",
+    "verification.type": "40CFR1065.307",
+    "description": "The calibration is the repeatable comparison of measurement values delivered by a device under test (Read) with those of a calibration standard (Reference) of known accuracy at defined points. The calibration is done without change of the device under test and without change of its measurement values."
+  },
+  "ambient_conditions": {
+    "t": "23.5 °C",
+    "rh": "36.3 rH",
+    "patm": "961.34 hPa abs."
+  },
+  "result": {
+    "data": [
+      {
+        "description": "linCheck.cal.zero",
+        "dut": "0.000",
+        "dut.stats": {},
+        "reference": "0.040",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "linCheck.cal.end",
+        "dut": "100.000",
+        "dut.stats": {
+          "min": "0",
+          "max": "101.24",
+          "dev.abs": "0.100",
+          "dev.rel": "0.100",
+          "dev.std": "0.001"
+        },
+        "reference": "100.100",
+        "reference.stats": {
+          "read.origin": "99.85"
+        },
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "linCheck.offset",
+        "dut": "0.000",
+        "dut.stats": {},
+        "reference": "0.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "linCheck.span",
+        "dut": "101.000",
+        "dut.stats": {},
+        "reference": "0.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "0 %",
+        "dut": "0.000",
+        "dut.stats": {},
+        "reference": "0.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "10 %",
+        "dut": "10.100",
+        "dut.stats": {},
+        "reference": "10.030",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "20 %",
+        "dut": "20.200",
+        "dut.stats": {},
+        "reference": "20.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "30 %",
+        "dut": "30.300",
+        "dut.stats": {},
+        "reference": "30.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "40 %",
+        "dut": "40.400",
+        "dut.stats": {},
+        "reference": "40.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "50 %",
+        "dut": "50.500",
+        "dut.stats": {},
+        "reference": "50.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "60 %",
+        "dut": "60.600",
+        "dut.stats": {},
+        "reference": "60.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "70 %",
+        "dut": "70.700",
+        "dut.stats": {},
+        "reference": "70.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "80 %",
+        "dut": "80.800",
+        "dut.stats": {},
+        "reference": "80.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "90 %",
+        "dut": "90.900",
+        "dut.stats": {},
+        "reference": "90.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "100 %",
+        "dut": "101.000",
+        "dut.stats": {},
+        "reference": "100.000",
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      },
+      {
+        "description": "formula",
+        "dut": null,
+        "dut.stats": {},
+        "reference": null,
+        "reference.stats": {},
+        "limit": null,
+        "result": null
+      }
+    ],
+    "verification": [
+      {
+        "type": "CFR §1065.602",
+        "data": [
+          {
+            "description": "Accuracy",
+            "dut": "+0.025",
+            "dut.stats": {},
+            "reference": null,
+            "reference.stats": {},
+            "limit": ">10",
+            "result": "passed"
+          },
+          {
+            "description": "Noise",
+            "dut": "+0.362",
+            "dut.stats": {},
+            "reference": null,
+            "reference.stats": {},
+            "limit": ">10",
+            "result": "passed"
+          },
+          {
+            "description": "Repeatability",
+            "dut": "+0.030",
+            "dut.stats": {},
+            "reference": null,
+            "reference.stats": {},
+            "limit": ">10",
+            "result": "passed"
+          }
+        ]
+      },
+      {
+        "type": "(EU) 2017/11512",
+        "data": [
+          {
+            "description": "Accuracy",
+            "dut": "+0.025",
+            "dut.stats": {},
+            "reference": null,
+            "reference.stats": {},
+            "limit": ">10",
+            "result": "passed"
+          },
+          {
+            "description": "Noise",
+            "dut": "+0.362",
+            "dut.stats": {},
+            "reference": null,
+            "reference.stats": {},
+            "limit": ">10",
+            "result": "passed"
+          },
+          {
+            "description": "Precision",
+            "dut": "+0.030",
+            "dut.stats": {},
+            "reference": null,
+            "reference.stats": {},
+            "limit": ">10",
+            "result": "passed"
+          }
+        ]
+      }
+    ]
+  }
+}
